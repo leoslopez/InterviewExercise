@@ -15,27 +15,21 @@
             </div>
         </header>
         <div id="body">
-            @RenderSection("featured", required: false)
+            @*@RenderSection("featured", required: false)*@
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
                 <table id="eventsTable" class="display">
                     <thead>
                         <tr>
-                            <th>Column 1</th>
-                            <th>Column 2</th>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Technology</th>
+                            <th>Starting Date</th>
+                            <th>Registration Link</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @{
-                            int i = 1;
-                            for(i = 1; i <= 100; i++) 
-                            {
-                                <tr>
-                                    <td>Row @i Col 1</td>
-                                    <td>Row @i Col 2</td>
-                                </tr>
-                            }
-                        }
+                        
                     </tbody>
                 </table>
             </section>
@@ -52,8 +46,28 @@
         @Scripts.Render("~/bundles/jqueryDatables")
         
         <script type="text/javascript">
+            //$(document).ready(function () {
+            //    $('#eventsTable').DataTable();
+            //});
+
             $(document).ready(function () {
-                $('#eventsTable').DataTable();
+
+                $('#eventsTable').dataTable({
+                    "bServerSide": true,
+                    "sAjaxSource": "Home/GetEventsList",
+                    "bProcessing": true,
+                    "aoColumns": [
+                                    {
+                                        "sName": "ID",
+                                        "bSearchable": false,
+                                        "bSortable": false
+                                    },
+                                    { "sName": "TITLE" },
+                                    { "sName": "TECHNOLOGY" },
+                                    { "sName": "STARTING_DATE" },
+                                    { "sName": "REGISTRATION_LINK" }
+                    ]
+                });
             });
         </script>
     </body>
