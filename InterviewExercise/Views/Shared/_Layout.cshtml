@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Styles.Render("~/DataTables/css")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+                <table id="eventsTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Column 1</th>
+                            <th>Column 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                            for(i = 1; i <= 100; i++) 
+                            {
+                                <tr>
+                                    <td>Row @i Col 1</td>
+                                    <td>Row @i Col 2</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryDatables")
+        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#eventsTable').DataTable();
+            });
+        </script>
+    </body>
+</html>
