@@ -46,16 +46,20 @@
         @Scripts.Render("~/bundles/jqueryDatables")
         
         <script type="text/javascript">
-            //$(document).ready(function () {
-            //    $('#eventsTable').DataTable();
-            //});
-
             $(document).ready(function () {
 
                 $('#eventsTable').dataTable({
                     "bServerSide": true,
                     "sAjaxSource": "Home/GetEventsList",
                     "bProcessing": true,
+                    "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+                        oSettings.jqXHR = $.ajax( {
+                            "url": sSource,
+                            "data": aoData,
+                            "success": fnCallback,
+                            "cache": true
+                        } );
+                    },
                     "aoColumns": [
                                     {
                                         "sName": "ID",
