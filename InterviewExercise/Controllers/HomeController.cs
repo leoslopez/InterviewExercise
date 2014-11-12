@@ -9,7 +9,7 @@ namespace InterviewExercise.Controllers
 {
     public class HomeController : Controller
     {
-        [OutputCache(Duration = 30)]
+        [OutputCache(Duration = 1800, VaryByParam = "none")]
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -17,7 +17,7 @@ namespace InterviewExercise.Controllers
             return View();
         }
 
-        [OutputCache(Duration = 30)]
+        [OutputCache(Duration = 1800, VaryByParam = "iDisplayStart;iDisplayLength;sSearch")]
         public ActionResult GetEventsList(DataTableParamModel param)
         {
             List<Event> allRows = new List<Event>();
@@ -40,7 +40,7 @@ namespace InterviewExercise.Controllers
             var displayedRows = filteredRows.Skip(param.iDisplayStart).Take(param.iDisplayLength);
 
             var result = from e in displayedRows
-                         select new string[] { Convert.ToString(e.EventId), e.Title, e.Technology, e.StartingDate.ToShortDateString(), e.RegistrationLink };
+                         select new string[] { Convert.ToString(e.EventId), e.Title, e.Technology, e.StartingDate.ToShortTimeString(), e.RegistrationLink };
             result = result.ToList();
 
             return Json(new
