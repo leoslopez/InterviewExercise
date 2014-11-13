@@ -49,6 +49,7 @@
             $(document).ready(function () {
 
                 $('#eventsTable').dataTable({
+                    "iDisplayLength": 100,
                     "bServerSide": true,
                     "sAjaxSource": "Home/GetEventsList",
                     "bProcessing": true,
